@@ -83,6 +83,7 @@ In order to add support for additional languages we have a complete guide on how
 | [TOML](https://github.com/cengelbart39/tree-sitter-toml/tree/feature/spm) | ✅ | ✅ |
 | [TypeScript/TSX](https://github.com/tree-sitter/tree-sitter-typescript) | ✅ | ✅ |
 | [Verilog](https://github.com/tree-sitter/tree-sitter-verilog) | ✅ | _not available_ |
+| [XML](https://github.com/tree-sitter-grammars/tree-sitter-xml) | ✅ | ✅ |
 | [YAML](https://github.com/tree-sitter-grammars/tree-sitter-yaml.git) | ✅ | ✅ |
 | [Zig](https://github.com/tree-sitter-grammars/tree-sitter-zig.git) | ✅ | ✅ |
 

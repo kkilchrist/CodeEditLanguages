@@ -61,6 +61,7 @@ extern TSLanguage *tree_sitter_toml();
 extern TSLanguage *tree_sitter_tsx();
 extern TSLanguage *tree_sitter_typescript();
 extern TSLanguage *tree_sitter_verilog();
+extern TSLanguage *tree_sitter_xml();
 extern TSLanguage *tree_sitter_yaml();
 extern TSLanguage *tree_sitter_zig();
 

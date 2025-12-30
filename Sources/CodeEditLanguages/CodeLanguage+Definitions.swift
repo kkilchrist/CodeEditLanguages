@@ -53,6 +53,7 @@ public extension CodeLanguage {
         .tsx,
         .typescript,
         .verilog,
+        .xml,
         .yaml,
         .zig
     ]
@@ -472,6 +473,15 @@ public extension CodeLanguage {
         lineCommentString: "//",
         rangeCommentStrings: ("/*", "*/"),
         highlights: ["folds", "injections"]
+    )
+
+    /// A language structure for `XML`
+    static let xml: CodeLanguage = .init(
+        id: .xml,
+        tsName: "xml",
+        extensions: ["xml", "xsl", "xslt", "xsd", "svg", "plist"],
+        lineCommentString: "",
+        rangeCommentStrings: ("<!--", "-->")
     )
 
     /// A language structure for `YAML`

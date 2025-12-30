@@ -167,6 +167,8 @@ public struct CodeLanguage {
             return tree_sitter_typescript()
         case .verilog:
             return tree_sitter_verilog()
+        case .xml:
+            return tree_sitter_xml()
         case .yaml:
             return tree_sitter_yaml()
         case .zig:

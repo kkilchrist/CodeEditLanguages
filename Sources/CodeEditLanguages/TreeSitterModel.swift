@@ -100,6 +100,8 @@ public class TreeSitterModel {
             return typescriptQuery
         case .verilog:
             return nil
+        case .xml:
+            return xmlQuery
         case .yaml:
             return yamlQuery
         case .zig:
@@ -287,6 +289,11 @@ public class TreeSitterModel {
     /// Query for `Typescript` files.
     public private(set) lazy var typescriptQuery: Query? = {
         return queryFor(.typescript)
+    }()
+
+    /// Query for `XML` files.
+    public private(set) lazy var xmlQuery: Query? = {
+        return queryFor(.xml)
     }()
 
     /// Query for `YAML` files.

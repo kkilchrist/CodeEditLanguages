@@ -49,6 +49,7 @@ public enum TreeSitterLanguage: String {
     case tsx
     case typescript
     case verilog
+    case xml
     case yaml
     case zig
     case plainText

@@ -808,6 +808,39 @@ final class CodeEditLanguagesTests: XCTestCase {
         XCTAssertEqual(language.id, .verilog)
     }
 
+// MARK: - XML
+
+    func test_CodeLanguageXML() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.xml")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .xml)
+    }
+
+    func test_CodeLanguageXML2() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.plist")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .xml)
+    }
+
+    func test_CodeLanguageXML3() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.svg")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .xml)
+    }
+
+    func test_FetchQueryXML() throws {
+        var language = CodeLanguage.xml
+        language.resourceURL = bundleURL
+
+        let data = try Data(contentsOf: language.queryURL!)
+        let query = try? Query(language: language.language!, data: data)
+        XCTAssertNotNil(query)
+        XCTAssertNotEqual(query?.patternCount, 0)
+    }
+
 // MARK: - YAML
 
     func test_CodeLanguageYAML() throws {
