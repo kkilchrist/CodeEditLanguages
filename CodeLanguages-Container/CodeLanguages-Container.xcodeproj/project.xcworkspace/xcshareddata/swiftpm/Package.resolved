@@ -1,5 +1,5 @@
 {
-  "originHash" : "c940c7467f54711e27ceb0cef308954e1fdbcc20f3dd59d96d6efbe29d7a04ba",
+  "originHash" : "a9bf49e9e2844e9e75752996c812939b5b62c23ec73c653389e803ab86add816",
   "pins" : [
     {
       "identity" : "tree-sitter-agda",
@@ -233,6 +233,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "4bfdd9033a2225cc95032ce77066b7aeca9e2efc"
+      }
+    },
+    {
+      "identity" : "tree-sitter-r",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/r-lib/tree-sitter-r/",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0e6ef7741712c09dc3ee6e81c42e919820cc65ef"
       }
     },
     {
