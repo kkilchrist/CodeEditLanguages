@@ -73,6 +73,7 @@ In order to add support for additional languages we have a complete guide on how
 | [Perl](https://github.com/ganezdragon/tree-sitter-perl) | ✅ | _not available_ |
 | [PHP](https://github.com/tree-sitter/tree-sitter-php) | ✅ | ✅ |
 | [Python](https://github.com/tree-sitter/tree-sitter-python) | ✅ | ✅ |
+| [R](https://github.com/r-lib/tree-sitter-r) | ✅ | ✅ |
 | [Regex](https://github.com/tree-sitter/tree-sitter-regex) | ✅ | ✅ |
 | [Ruby](https://github.com/mattmassicotte/tree-sitter-ruby) | ✅ | ✅ |
 | [Rust](https://github.com/tree-sitter/tree-sitter-rust) | ✅ | ✅ |
@@ -84,6 +85,24 @@ In order to add support for additional languages we have a complete guide on how
 | [Verilog](https://github.com/tree-sitter/tree-sitter-verilog) | ✅ | _not available_ |
 | [YAML](https://github.com/tree-sitter-grammars/tree-sitter-yaml.git) | ✅ | ✅ |
 | [Zig](https://github.com/tree-sitter-grammars/tree-sitter-zig.git) | ✅ | ✅ |
+
+## Building the Framework
+
+When adding new languages, you need to rebuild the binary framework using `./build_framework.sh`.
+
+### Troubleshooting
+
+If the build script fails with:
+```
+xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+```
+
+Run this command to point to your Xcode installation:
+```bash
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+
+Then run `./build_framework.sh` again.
 
 ## Related Repositories
 
