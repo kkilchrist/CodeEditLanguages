@@ -145,6 +145,8 @@ public struct CodeLanguage {
             return tree_sitter_php()
         case .python:
             return tree_sitter_python()
+        case .r:
+            return tree_sitter_r()
         case .regex:
             return tree_sitter_regex()
         case .ruby:

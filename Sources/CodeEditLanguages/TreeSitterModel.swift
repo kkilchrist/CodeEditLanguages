@@ -78,6 +78,8 @@ public class TreeSitterModel {
             return phpQuery
         case .python:
             return pythonQuery
+        case .r:
+            return rQuery
         case .regex:
             return regexQuery
         case .ruby:
@@ -235,6 +237,11 @@ public class TreeSitterModel {
     /// Query for `Python` files.
     public private(set) lazy var pythonQuery: Query? = {
         return queryFor(.python)
+    }()
+
+    /// Query for `R` files.
+    public private(set) lazy var rQuery: Query? = {
+        return queryFor(.r)
     }()
 
     /// Query for `Regex` files.

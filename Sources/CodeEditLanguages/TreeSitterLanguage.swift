@@ -38,6 +38,7 @@ public enum TreeSitterLanguage: String {
     case perl
     case php
     case python
+    case r
     case regex
     case ruby
     case rust

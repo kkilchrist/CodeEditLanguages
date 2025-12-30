@@ -42,6 +42,7 @@ public extension CodeLanguage {
         .perl,
         .php,
         .python,
+        .r,
         .regex,
         .ruby,
         .rust,
@@ -352,6 +353,17 @@ public extension CodeLanguage {
         documentationCommentStrings: [.pair(("\"\"\"", "\"\"\""))],
         highlights: ["folds", "indents", "injections", "locals", "tags"],
         additionalIdentifiers: ["python2", "python3"]
+    )
+
+    /// A language structure for `R`
+    static let r: CodeLanguage = .init(
+        id: .r,
+        tsName: "r",
+        extensions: ["r", "R"],
+        lineCommentString: "#",
+        rangeCommentStrings: ("", ""),
+        documentationCommentStrings: [.single("#'")],
+        additionalIdentifiers: ["Rscript"]
     )
 
     /// A language structure for `Regex`

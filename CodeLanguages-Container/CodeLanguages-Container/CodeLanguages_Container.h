@@ -50,6 +50,7 @@ extern TSLanguage *tree_sitter_ocaml_interface();
 extern TSLanguage *tree_sitter_perl();
 extern TSLanguage *tree_sitter_php();
 extern TSLanguage *tree_sitter_python();
+extern TSLanguage *tree_sitter_r();
 extern TSLanguage *tree_sitter_regex();
 extern TSLanguage *tree_sitter_ruby();
 extern TSLanguage *tree_sitter_rust();

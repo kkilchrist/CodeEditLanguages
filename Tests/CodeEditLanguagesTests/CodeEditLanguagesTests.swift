@@ -613,6 +613,32 @@ final class CodeEditLanguagesTests: XCTestCase {
         XCTAssertNotEqual(query?.patternCount, 0)
     }
 
+// MARK: - R
+
+    func test_CodeLanguageR() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.r")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .r)
+    }
+
+    func test_CodeLanguageR2() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.R")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .r)
+    }
+
+    func test_FetchQueryR() throws {
+        var language = CodeLanguage.r
+        language.resourceURL = bundleURL
+
+        let data = try Data(contentsOf: language.queryURL!)
+        let query = try? Query(language: language.language!, data: data)
+        XCTAssertNotNil(query)
+        XCTAssertNotEqual(query?.patternCount, 0)
+    }
+
 // MARK: - Ruby
 
     func test_CodeLanguageRuby() throws {
