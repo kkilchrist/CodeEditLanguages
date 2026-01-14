@@ -39,8 +39,30 @@ rm -rf "$OUTPUT_PATH" 2>/dev/null || true
 rm -f "$OUTPUT_PATH".zip 2>/dev/null || true
 status "Removed previous generated files!"
 
+# Function to patch tree-sitter-properties Package.swift to include scanner.c
+patch_tree_sitter_properties() {
+    local derived_path="$1"
+    local props_pkg="$derived_path/SourcePackages/checkouts/tree-sitter-properties/Package.swift"
+    if [ -f "$props_pkg" ]; then
+        # Replace the dynamic file check with a static sources list
+        sed -i '' 's/var sources = \["src\/parser.c"\]/var sources = ["src\/parser.c", "src\/scanner.c"]/' "$props_pkg"
+        sed -i '' '/if FileManager.default.fileExists/,/}/d' "$props_pkg"
+        status "Patched tree-sitter-properties in $derived_path"
+    fi
+}
+
 # Build for macOS
 status "Building for macOS..."
+# First resolve packages
+xcodebuild \
+    -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
+    -scheme CodeLanguages-Container \
+    -destination "platform=macOS" \
+    -derivedDataPath DerivedData \
+    $QUIET_FLAG -resolvePackageDependencies &> $QUIET_OUTPUT
+# Patch tree-sitter-properties
+patch_tree_sitter_properties "$PWD/DerivedData"
+# Then build
 xcodebuild \
     -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
     -scheme CodeLanguages-Container \
@@ -50,11 +72,21 @@ xcodebuild \
     ARCHS="arm64 x86_64" \
     ONLY_ACTIVE_ARCH=NO \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-    $QUIET_FLAG clean build &> $QUIET_OUTPUT
+    $QUIET_FLAG build &> $QUIET_OUTPUT
 status "macOS build complete!"
 
 # Build for iOS device
 status "Building for iOS device..."
+# First resolve packages
+xcodebuild \
+    -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
+    -scheme CodeLanguages-Container \
+    -destination "generic/platform=iOS" \
+    -derivedDataPath DerivedData-iOS \
+    $QUIET_FLAG -resolvePackageDependencies &> $QUIET_OUTPUT
+# Patch tree-sitter-properties
+patch_tree_sitter_properties "$PWD/DerivedData-iOS"
+# Then build
 xcodebuild \
     -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
     -scheme CodeLanguages-Container \
@@ -65,11 +97,21 @@ xcodebuild \
     ONLY_ACTIVE_ARCH=NO \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     SUPPORTS_MACCATALYST=NO \
-    $QUIET_FLAG clean build &> $QUIET_OUTPUT
+    $QUIET_FLAG build &> $QUIET_OUTPUT
 status "iOS device build complete!"
 
 # Build for iOS Simulator
 status "Building for iOS Simulator..."
+# First resolve packages
+xcodebuild \
+    -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
+    -scheme CodeLanguages-Container \
+    -destination "generic/platform=iOS Simulator" \
+    -derivedDataPath DerivedData-Sim \
+    $QUIET_FLAG -resolvePackageDependencies &> $QUIET_OUTPUT
+# Patch tree-sitter-properties
+patch_tree_sitter_properties "$PWD/DerivedData-Sim"
+# Then build
 xcodebuild \
     -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
     -scheme CodeLanguages-Container \
@@ -79,7 +121,7 @@ xcodebuild \
     ARCHS="arm64 x86_64" \
     ONLY_ACTIVE_ARCH=NO \
     BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-    $QUIET_FLAG clean build &> $QUIET_OUTPUT
+    $QUIET_FLAG build &> $QUIET_OUTPUT
 status "iOS Simulator build complete!"
 
 # Set framework paths
@@ -112,7 +154,7 @@ status "CodeLanguagesContainer.xcframework.zip created!"
 # copy language queries to package resources
 # set path variables
 CHECKOUTS_PATH="$PWD/DerivedData/SourcePackages/checkouts"
-RESOURCES_PATH="$PWD/Sources/CodeEditLanguages/Resources"
+RESOURCES_PATH="$PWD/Sources/CodeEditLanguages/Queries"
 
 # remove previous copied files
 status "Copying language queries to package resources..."
