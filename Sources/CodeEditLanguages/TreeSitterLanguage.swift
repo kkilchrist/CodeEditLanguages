@@ -21,6 +21,7 @@ public enum TreeSitterLanguage: String {
     case go
     case goMod
     case haskell
+    case ini
     case html
     case java
     case javascript
@@ -30,6 +31,7 @@ public enum TreeSitterLanguage: String {
     case julia
     case kotlin
     case lua
+    case make
     case markdown
     case markdownInline
     case objc
@@ -37,6 +39,7 @@ public enum TreeSitterLanguage: String {
     case ocamlInterface
     case perl
     case php
+    case properties
     case python
     case r
     case regex

@@ -111,6 +111,8 @@ public struct CodeLanguage {
             return tree_sitter_gomod()
         case .haskell:
             return tree_sitter_haskell()
+        case .ini:
+            return tree_sitter_ini()
         case .html:
             return tree_sitter_html()
         case .java:
@@ -129,6 +131,8 @@ public struct CodeLanguage {
             return tree_sitter_kotlin()
         case .lua:
             return tree_sitter_lua()
+        case .make:
+            return tree_sitter_make()
         case .markdown:
             return tree_sitter_markdown()
         case .markdownInline:
@@ -143,6 +147,8 @@ public struct CodeLanguage {
             return tree_sitter_perl()
         case .php:
             return tree_sitter_php()
+        case .properties:
+            return tree_sitter_properties()
         case .python:
             return tree_sitter_python()
         case .r:

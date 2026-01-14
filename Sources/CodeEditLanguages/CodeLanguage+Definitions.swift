@@ -25,6 +25,7 @@ public extension CodeLanguage {
         .go,
         .goMod,
         .haskell,
+        .ini,
         .html,
         .java,
         .javascript,
@@ -34,6 +35,7 @@ public extension CodeLanguage {
         .julia,
         .kotlin,
         .lua,
+        .make,
         .markdown,
         .markdownInline,
         .objc,
@@ -41,6 +43,7 @@ public extension CodeLanguage {
         .ocamlInterface,
         .perl,
         .php,
+        .properties,
         .python,
         .r,
         .regex,
@@ -180,6 +183,15 @@ public extension CodeLanguage {
         highlights: ["folds", "injections", "locals"]
     )
 
+    /// A language structure for `INI`
+    static let ini: CodeLanguage = .init(
+        id: .ini,
+        tsName: "ini",
+        extensions: ["ini", "cfg", "conf", "desktop", "directory"],
+        lineCommentString: ";",
+        rangeCommentStrings: ("", "")
+    )
+
     /// A language structure for `HTML`
     static let html: CodeLanguage = .init(
         id: .html,
@@ -272,6 +284,15 @@ public extension CodeLanguage {
         highlights: ["folds", "indents", "injections", "locals", "tags"]
     )
 
+    /// A language structure for `Makefile`
+    static let make: CodeLanguage = .init(
+        id: .make,
+        tsName: "make",
+        extensions: ["Makefile", "makefile", "mk", "mak"],
+        lineCommentString: "#",
+        rangeCommentStrings: ("", "")
+    )
+
     /// A language structure for `Markdown`
     static let markdown: CodeLanguage = .init(
         id: .markdown,
@@ -342,6 +363,15 @@ public extension CodeLanguage {
         lineCommentString: "//",
         rangeCommentStrings: ("/*", "*/"),
         highlights: ["folds", "indents", "injections", "locals", "tags"]
+    )
+
+    /// A language structure for `Properties`
+    static let properties: CodeLanguage = .init(
+        id: .properties,
+        tsName: "properties",
+        extensions: ["properties", "env", "env.local", "env.development", "env.production"],
+        lineCommentString: "#",
+        rangeCommentStrings: ("", "")
     )
 
     /// A language structure for `Python`

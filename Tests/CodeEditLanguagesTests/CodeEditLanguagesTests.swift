@@ -259,6 +259,25 @@ final class CodeEditLanguagesTests: XCTestCase {
         XCTAssertNotEqual(query?.patternCount, 0)
     }
 
+// MARK: - INI
+
+    func test_CodeLanguageINI() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.ini")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .ini)
+    }
+
+    func test_FetchQueryINI() throws {
+        var language = CodeLanguage.ini
+        language.resourceURL = bundleURL
+
+        let data = try Data(contentsOf: language.queryURL!)
+        let query = try? Query(language: language.language!, data: data)
+        XCTAssertNotNil(query)
+        XCTAssertNotEqual(query?.patternCount, 0)
+    }
+
 // MARK: - HTML
 
     func test_CodeLanguageHTML() throws {
@@ -440,6 +459,26 @@ final class CodeEditLanguagesTests: XCTestCase {
         XCTAssertNotNil(query)
         XCTAssertNotEqual(query?.patternCount, 0)
     }
+
+// MARK: - Makefile
+
+    func test_CodeLanguageMake() throws {
+        let url = URL(fileURLWithPath: "~/path/to/Makefile")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .make)
+    }
+
+    func test_FetchQueryMake() throws {
+        var language = CodeLanguage.make
+        language.resourceURL = bundleURL
+
+        let data = try Data(contentsOf: language.queryURL!)
+        let query = try? Query(language: language.language!, data: data)
+        XCTAssertNotNil(query)
+        XCTAssertNotEqual(query?.patternCount, 0)
+    }
+
 // MARK: - Markdown
 
     func test_CodeLanguageMarkdown() throws {
@@ -586,6 +625,32 @@ final class CodeEditLanguagesTests: XCTestCase {
 
     func test_FetchQueryPHP() throws {
         var language = CodeLanguage.php
+        language.resourceURL = bundleURL
+
+        let data = try Data(contentsOf: language.queryURL!)
+        let query = try? Query(language: language.language!, data: data)
+        XCTAssertNotNil(query)
+        XCTAssertNotEqual(query?.patternCount, 0)
+    }
+
+// MARK: - Properties
+
+    func test_CodeLanguageProperties() throws {
+        let url = URL(fileURLWithPath: "~/path/to/file.properties")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .properties)
+    }
+
+    func test_CodeLanguageEnv() throws {
+        let url = URL(fileURLWithPath: "~/path/to/.env")
+        let language = CodeLanguage.detectLanguageFrom(url: url)
+
+        XCTAssertEqual(language.id, .properties)
+    }
+
+    func test_FetchQueryProperties() throws {
+        var language = CodeLanguage.properties
         language.resourceURL = bundleURL
 
         let data = try Data(contentsOf: language.queryURL!)

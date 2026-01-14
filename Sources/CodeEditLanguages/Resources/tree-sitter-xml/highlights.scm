@@ -2,13 +2,11 @@
 
 "xml" @keyword
 
-[ "version" "encoding" "standalone" ] @property
+[ "version" "encoding" ] @property
 
 (EncName) @string.special
 
 (VersionNum) @number
-
-[ "yes" "no" ] @boolean
 
 ;; Processing instructions
 
@@ -107,61 +105,24 @@
 
 (SystemLiteral (URI) @markup.link)
 
-;; Processing instructions
-
-(XmlModelPI "xml-model" @keyword)
-
-(StyleSheetPI "xml-stylesheet" @keyword)
-
-(PseudoAtt (Name) @property)
-
-(PseudoAtt (PseudoAttValue) @string)
-
-;; Doctype declaration
-
-(doctypedecl "DOCTYPE" @keyword)
-
-(doctypedecl (Name) @type)
-
-;; Tags
-
-(STag (Name) @tag)
-
-(ETag (Name) @tag)
-
-(EmptyElemTag (Name) @tag)
-
-;; Attributes
-
-(Attribute (Name) @property)
-
-(Attribute (AttValue) @string)
-
 ;; Delimiters & punctuation
 
 [
- "<?" "?>"
- "<!" "]]>"
- "<" ">"
- "</" "/>"
+  "<?" "?>"
+  "<!" ">"
+  "<![" "]]>"
 ] @punctuation.delimiter
 
-[ "(" ")" "[" "]" ] @punctuation.bracket
+[ "(" ")" "[" ] @punctuation.bracket
 
 [ "\"" "'" ] @punctuation.delimiter
 
 [ "," "|" "=" ] @operator
 
-;; Text
-
-(CharData) @markup
-
-(CDSect
-  (CDStart) @markup.heading
-  (CData) @markup.raw
-  "]]>" @markup.heading)
-
 ;; Misc
+
+; FIXME: enable when ts test is fixed
+; [ "INCLUDE" "IGNORE" ] @keyword
 
 (Comment) @comment
 

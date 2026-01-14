@@ -44,6 +44,8 @@ public class TreeSitterModel {
             return goModQuery
         case .haskell:
             return haskellQuery
+        case .ini:
+            return iniQuery
         case .html:
             return htmlQuery
         case .java:
@@ -62,6 +64,8 @@ public class TreeSitterModel {
             return kotlinQuery
         case .lua:
             return luaQuery
+        case .make:
+            return makeQuery
         case .markdown:
             return markdownQuery
         case .markdownInline:
@@ -76,6 +80,8 @@ public class TreeSitterModel {
             return nil
         case .php:
             return phpQuery
+        case .properties:
+            return propertiesQuery
         case .python:
             return pythonQuery
         case .r:
@@ -166,6 +172,11 @@ public class TreeSitterModel {
         return queryFor(.haskell)
     }()
 
+    /// Query for `INI` files.
+    public private(set) lazy var iniQuery: Query? = {
+        return queryFor(.ini)
+    }()
+
     /// Query for `HTML` files.
     public private(set) lazy var htmlQuery: Query? = {
         return queryFor(.html)
@@ -206,6 +217,11 @@ public class TreeSitterModel {
         return queryFor(.lua)
     }()
 
+    /// Query for `Makefile` files.
+    public private(set) lazy var makeQuery: Query? = {
+        return queryFor(.make)
+    }()
+
     /// Query for `Markdown` files.
     public private(set) lazy var markdownQuery: Query? = {
         return queryFor(.markdown)
@@ -234,6 +250,11 @@ public class TreeSitterModel {
     /// Query for `PHP` files.
     public private(set) lazy var phpQuery: Query? = {
         return queryFor(.php)
+    }()
+
+    /// Query for `Properties` files.
+    public private(set) lazy var propertiesQuery: Query? = {
+        return queryFor(.properties)
     }()
 
     /// Query for `Python` files.

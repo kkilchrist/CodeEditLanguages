@@ -1,5 +1,5 @@
 {
-  "originHash" : "5e60d81c8d0e06861a13165c44b11a73cb723b4488da8e2c2bfb80f2a36fe37a",
+  "originHash" : "caffc5d1d33c6adda09227d5b8d92c6ab5138ad65deacaecc92b4106ee1e3349",
   "pins" : [
     {
       "identity" : "tree-sitter-agda",
@@ -119,6 +119,15 @@
       }
     },
     {
+      "identity" : "tree-sitter-ini",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/justinmk/tree-sitter-ini",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e4018b5176132b4f3c5d6e61cea383f42288d0f5"
+      }
+    },
+    {
       "identity" : "tree-sitter-java",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tree-sitter/tree-sitter-java.git",
@@ -182,12 +191,30 @@
       }
     },
     {
+      "identity" : "tree-sitter-make",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter-grammars/tree-sitter-make",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5e9e8f8ff3387b0edcaa90f46ddf3629f4cfeb1d"
+      }
+    },
+    {
       "identity" : "tree-sitter-markdown",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tree-sitter-grammars/tree-sitter-markdown",
       "state" : {
         "branch" : "split_parser",
         "revision" : "5cdc549ab8f461aff876c5be9741027189299cec"
+      }
+    },
+    {
+      "identity" : "tree-sitter-matlab",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kkilchrist/tree-sitter-matlab",
+      "state" : {
+        "branch" : "main",
+        "revision" : "272819e380d7044278ad589e8952e47e3275698e"
       }
     },
     {
@@ -224,6 +251,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "b569a5f2c0d592e67430520d1a0e1f765d83ceb0"
+      }
+    },
+    {
+      "identity" : "tree-sitter-properties",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tree-sitter-grammars/tree-sitter-properties",
+      "state" : {
+        "branch" : "master",
+        "revision" : "6310671b24d4e04b803577b1c675d765cbd5773b"
       }
     },
     {

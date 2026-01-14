@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# This script builds the CodeLanguagesContainer.xcframework
+# This script builds the CodeLanguagesContainer.xcframework for macOS and iOS
 #
 # Just call it from the root of the project
 # $ ./build_framework.sh
@@ -9,6 +9,7 @@
 # $ ./build_framework.sh --debug
 #
 # Created by: Lukas Pistrol on 29.10.2022
+# Updated: Added iOS support
 
 # convenience function to print a status message in green
 status () {
@@ -29,8 +30,17 @@ fi
 # Set pipefail to make sure that the script fails if any of the commands fail
 set -euo pipefail
 
-# build the framework project `CodeLanguages-Container`
-status "Clean Building CodeLanguages-Container.xcodeproj..."
+# set path variables
+PRODUCTS_PATH="$PWD/DerivedData/Build/Products/Release"
+OUTPUT_PATH="CodeLanguagesContainer.xcframework"
+
+# remove previous generated files
+rm -rf "$OUTPUT_PATH" 2>/dev/null || true
+rm -f "$OUTPUT_PATH".zip 2>/dev/null || true
+status "Removed previous generated files!"
+
+# Build for macOS
+status "Building for macOS..."
 xcodebuild \
     -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
     -scheme CodeLanguages-Container \
@@ -39,25 +49,56 @@ xcodebuild \
     -configuration Release \
     ARCHS="arm64 x86_64" \
     ONLY_ACTIVE_ARCH=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
     $QUIET_FLAG clean build &> $QUIET_OUTPUT
-status "Build complete!"
+status "macOS build complete!"
 
-# set path variables
-PRODUCTS_PATH="$PWD/DerivedData/Build/Products/Release"
-FRAMEWORK_PATH="$PRODUCTS_PATH/CodeLanguages_Container.framework"
-OUTPUT_PATH="CodeLanguagesContainer.xcframework"
+# Build for iOS device
+status "Building for iOS device..."
+xcodebuild \
+    -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
+    -scheme CodeLanguages-Container \
+    -destination "generic/platform=iOS" \
+    -derivedDataPath DerivedData-iOS \
+    -configuration Release \
+    ARCHS="arm64" \
+    ONLY_ACTIVE_ARCH=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    SUPPORTS_MACCATALYST=NO \
+    $QUIET_FLAG clean build &> $QUIET_OUTPUT
+status "iOS device build complete!"
 
-# remove previous generated files
-rm -rf "$OUTPUT_PATH"
-rm "$OUTPUT_PATH".zip
-status "Removed previous generated files!"
+# Build for iOS Simulator
+status "Building for iOS Simulator..."
+xcodebuild \
+    -project CodeLanguages-Container/CodeLanguages-Container.xcodeproj \
+    -scheme CodeLanguages-Container \
+    -destination "generic/platform=iOS Simulator" \
+    -derivedDataPath DerivedData-Sim \
+    -configuration Release \
+    ARCHS="arm64 x86_64" \
+    ONLY_ACTIVE_ARCH=NO \
+    BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+    $QUIET_FLAG clean build &> $QUIET_OUTPUT
+status "iOS Simulator build complete!"
 
-# build the binary framework
+# Set framework paths
+MACOS_FRAMEWORK_PATH="$PWD/DerivedData/Build/Products/Release/CodeLanguages_Container.framework"
+IOS_FRAMEWORK_PATH="$PWD/DerivedData-iOS/Build/Products/Release-iphoneos/CodeLanguages_Container.framework"
+IOS_SIM_FRAMEWORK_PATH="$PWD/DerivedData-Sim/Build/Products/Release-iphonesimulator/CodeLanguages_Container.framework"
+
+# Create xcframework with all platforms
 status "Creating CodeLanguagesContainer.xcframework..."
 xcodebuild \
     -create-xcframework \
-    -framework "$FRAMEWORK_PATH" \
+    -framework "$MACOS_FRAMEWORK_PATH" \
+    -framework "$IOS_FRAMEWORK_PATH" \
+    -framework "$IOS_SIM_FRAMEWORK_PATH" \
     -output "$OUTPUT_PATH" &> $QUIET_OUTPUT
+
+# Clean up iOS DerivedData
+rm -rf "$PWD/DerivedData-iOS"
+rm -rf "$PWD/DerivedData-Sim"
 
 # zip the xcframework
 status "Zipping CodeLanguagesContainer.xcframework..."
@@ -85,16 +126,16 @@ OLD_PWD="$PWD"
 for lang in $LIST ; do
     # determine how many targets a given package has
     cd $lang
-    
+
     # get package info as JSON
     manifest=$(swift package dump-package)
 
     # use jq to get the target path
     targets=$(echo $manifest | jq -r '.targets[] | select(.type != "test") | .path')
-    
+
     # use jq to count number of targets
     count=$(echo $manifest | jq '[.targets[] | select(.type != "test")] | length')
-    
+
     # Determine if target paths are all '.'
     same=1
     for target in $targets; do
@@ -107,7 +148,7 @@ for lang in $LIST ; do
     # loop through targets
     for target in $targets; do
         name=${lang##*/}
-        
+
         # if there is only one target, use name
         # otherwise use target
         if [[ $count -eq 1 || ($count -ne 1 && $same -eq 1) ]]; then
@@ -115,11 +156,11 @@ for lang in $LIST ; do
         else
             mkdir -p $RESOURCES_PATH/$target
         fi
-            
+
         highlights=$( find $lang/$target -type f -name "*.scm" )
         for highlight in $highlights ; do
             highlight_name=${highlight##*/}
-            
+
             # if there is only one target, use name
             # otherwise use target
             if [[ $count -eq 1 || ($count -ne 1 && $same -eq 1) ]]; then
@@ -128,7 +169,7 @@ for lang in $LIST ; do
                 cp -f $highlight $RESOURCES_PATH/$target/$highlight_name
             fi
         done
-        
+
         # If target paths are all '.', break out of loop
         if [[ $same -eq 1 || ($count -ne 1 && $same -eq 1) ]]; then
             break

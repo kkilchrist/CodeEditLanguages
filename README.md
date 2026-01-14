@@ -59,6 +59,7 @@ In order to add support for additional languages we have a complete guide on how
 | [Go](https://github.com/tree-sitter/tree-sitter-go) | ✅ | ✅ |
 | [Haskell](https://github.com/tree-sitter/tree-sitter-haskell) | ✅ | ✅ |
 | [HTML](https://github.com/tree-sitter/tree-sitter-html) | ✅ | ✅ |
+| [INI](https://github.com/justinmk/tree-sitter-ini) | ✅ | ✅ |
 | [Java](https://github.com/tree-sitter/tree-sitter-java) | ✅ | ✅ |
 | [JavaScript/JSX](https://github.com/tree-sitter/tree-sitter-javascript) | ✅ | ✅ |
 | [JSDoc](https://github.com/tree-sitter/tree-sitter-jsdoc) | ✅ | ✅ |
@@ -66,12 +67,14 @@ In order to add support for additional languages we have a complete guide on how
 | [Julia](https://github.com/tree-sitter/tree-sitter-julia) | ✅ | _not available_ |
 | [Kotlin](https://github.com/fwcd/tree-sitter-kotlin) | ✅ | ✅ |
 | [Lua](https://github.com/tree-sitter-grammars/tree-sitter-lua) | ✅ | ✅ |
+| [Makefile](https://github.com/tree-sitter-grammars/tree-sitter-make) | ✅ | ✅ |
 | [Markdown](https://github.com/tree-sitter-grammars/tree-sitter-markdown) | ✅ | ✅ |
 | [Objective C](https://github.com/tree-sitter-grammars/tree-sitter-objc) | ✅ | ✅ |
 | [OCaml](https://github.com/tree-sitter/tree-sitter-ocaml) | ✅ | ✅ |
 | Plain Text | ✅ | _not available_ |
 | [Perl](https://github.com/ganezdragon/tree-sitter-perl) | ✅ | _not available_ |
 | [PHP](https://github.com/tree-sitter/tree-sitter-php) | ✅ | ✅ |
+| [Properties/.env](https://github.com/tree-sitter-grammars/tree-sitter-properties) | ✅ | ✅ |
 | [Python](https://github.com/tree-sitter/tree-sitter-python) | ✅ | ✅ |
 | [R](https://github.com/r-lib/tree-sitter-r) | ✅ | ✅ |
 | [Regex](https://github.com/tree-sitter/tree-sitter-regex) | ✅ | ✅ |
