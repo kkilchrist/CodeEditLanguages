@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "CodeEditLanguages",
-    platforms: [.macOS(.v13), .iOS(.v15)],
+    platforms: [.macOS(.v13), .iOS(.v16)],
     products: [
         .library(
             name: "CodeEditLanguages",
